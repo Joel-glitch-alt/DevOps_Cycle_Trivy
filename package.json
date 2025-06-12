@@ -1,6 +1,7 @@
 {
   "name": "lets_row2",
   "version": "1.0.0",
+  "description": "",
   "main": "main.js",
   "scripts": {
     "lint": "npx eslint . --format checkstyle -o checkstyle-result.xml",
@@ -19,11 +20,10 @@
     "url": "https://github.com/Joel-glitch-alt/DevOps_Cycle_Trivy/issues"
   },
   "homepage": "https://github.com/Joel-glitch-alt/DevOps_Cycle_Trivy#readme",
-  "description": "",
-  "dependencies": {
-    "jest": "^30.0.0"
-  },
   "devDependencies": {
+    "eslint": "^8.57.0",
+    "html-validate": "^7.18.0",
+    "jest": "^30.0.0",
     "stylelint": "^16.20.0",
     "stylelint-config-standard": "^38.0.0"
   }
