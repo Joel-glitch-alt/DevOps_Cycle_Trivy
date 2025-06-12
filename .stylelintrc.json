@@ -5,5 +5,11 @@
     "alpha-value-notation": "percentage",
     "selector-type-no-unknown": true,
     "no-descending-specificity": true
-  }
+  },
+  "ignoreFiles": [
+    "coverage/**/*.css",
+    "node_modules/**/*.css",
+    "dist/**/*.css",
+    "build/**/*.css"
+  ]
 }
