@@ -22,7 +22,7 @@ body {
 /* Navigation */
 header {
   background-color: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 10px rgb(0 0 0 / 10%);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -41,6 +41,17 @@ nav {
   font-weight: 700;
   font-size: 1.5rem;
   color: var(--primary);
+}
+
+/* Footer links before nav hover to satisfy specificity */
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
 }
 
 .nav-links {
@@ -68,7 +79,11 @@ nav {
 .hero {
   padding: 5rem 5%;
   text-align: center;
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  background: linear-gradient(
+    135deg,
+    rgb(240 249 255 / 100%) 0%,
+    rgb(224 242 254 / 100%) 100%
+  );
 }
 
 .hero h1 {
@@ -81,7 +96,7 @@ nav {
   font-size: 1.2rem;
   max-width: 700px;
   margin: 0 auto 2rem;
-  color: #64748b;
+  color: rgb(100 116 139 / 100%);
 }
 
 .cta-button {
@@ -97,7 +112,7 @@ nav {
 
 .cta-button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+  box-shadow: 0 10px 20px rgb(37 99 235 / 20%);
 }
 
 /* Features Section */
@@ -118,7 +133,7 @@ nav {
 }
 
 .section-title p {
-  color: #64748b;
+  color: rgb(100 116 139 / 100%);
   max-width: 600px;
   margin: 0.5rem auto 0;
 }
@@ -133,13 +148,20 @@ nav {
   background: white;
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 5px 15px rgb(0 0 0 / 5%);
   transition: transform 0.3s, box-shadow 0.3s;
+  opacity: 0%;
+  transform: translateY(30px);
 }
 
 .feature-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px rgb(0 0 0 / 10%);
+}
+
+.feature-card.appear {
+  opacity: 100%;
+  transform: translateY(0);
 }
 
 .feature-icon {
@@ -161,29 +183,12 @@ footer {
   text-align: center;
 }
 
-.footer-links {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
-
-.footer-links a {
-  color: white;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.footer-links a:hover {
-  color: var(--accent);
-}
-
-copyright {
-  color: #94a3b8;
+.copyright {
+  color: rgb(148 163 184 / 100%);
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
+@media (width <= 768px) {
   .nav-links {
     display: none;
   }
@@ -195,15 +200,4 @@ copyright {
   .hero h1 {
     font-size: 2.5rem;
   }
-}
-
-.feature-card {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-}
-
-.feature-card.appear {
-  opacity: 1;
-  transform: translateY(0);
 }
