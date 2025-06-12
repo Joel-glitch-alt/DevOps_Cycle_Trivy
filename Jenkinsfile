@@ -8,6 +8,8 @@ pipeline {
 
   tools {
     nodejs 'NodeJs' // Ensure this matches your Node.js tool config in Jenkins
+    // Add SonarQube Scanner tool - replace 'SonarQubeScanner' with your actual tool name
+    sonarScanner 'SonarQubeScanner' 
   }
 
   stages {
@@ -38,7 +40,7 @@ pipeline {
       }
       post {
         always {
-          junit 'junit.xml' // MATCH this to your jest-junit config
+          junit 'junit.xml'
         }
       }
     }
