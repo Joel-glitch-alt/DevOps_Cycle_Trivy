@@ -3,11 +3,11 @@ pipeline {
 
   environment {
     NODE_ENV = 'test'
-    SONARQUBE = 'sonar-server' // Ensure this matches your Jenkins SonarQube config name
+    SONARQUBE = 'sonar-server' // This must match your Jenkins SonarQube config name
   }
 
   tools {
-    nodejs 'NodeJs' // Ensure this matches your Node.js tool config in Jenkins
+    nodejs 'NodeJs' // This must match your configured Node.js tool in Jenkins
   }
 
   stages {
@@ -46,7 +46,7 @@ pipeline {
     stage('SonarQube Analysis') {
       steps {
         script {
-          def scannerHome = tool 'sonar-scanner'  // Changed from 'SonarQubeScanner' to 'sonar-scanner'
+          def scannerHome = tool 'sonar-scanner'
           withSonarQubeEnv("${env.SONARQUBE}") {
             sh "${scannerHome}/bin/sonar-scanner"
           }
@@ -57,10 +57,20 @@ pipeline {
     stage('Quality Gate') {
       steps {
         timeout(time: 10, unit: 'MINUTES') {
-          waitForQualityGate abortPipeline: false  // Changed to false to not abort pipeline
+          waitForQualityGate abortPipeline: false
         }
       }
     }
+
+    stage('Trivy FS Scan') {
+      steps {
+        script {
+          // Trivy scan of the working directory
+          sh 'trivy fs --exit-code 1 --severity HIGH,CRITICAL .'
+        }
+      }
+    }
+
   }
 
   post {
