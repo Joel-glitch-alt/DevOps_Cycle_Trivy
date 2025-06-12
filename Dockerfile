@@ -1,5 +1,5 @@
-# Use official Node.js base image
-FROM node:18
+# Use safer Node.js base image with Bookworm (newer Debian release)
+FROM node:18-bookworm
 
 # Set working directory
 WORKDIR /app
