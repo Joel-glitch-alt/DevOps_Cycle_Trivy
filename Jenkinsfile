@@ -8,8 +8,8 @@ pipeline {
 
   tools {
     nodejs 'NodeJs' // Ensure this matches your Node.js tool config in Jenkins
-    // Add SonarQube Scanner tool - replace 'SonarQubeScanner' with your actual tool name
-    sonarScanner 'SonarQubeScanner' 
+    // Remove the duplicate sonarScanner line - only use one of these approaches
+    hudson.plugins.sonar.SonarRunnerInstallation 'SonarQubeScanner'
   }
 
   stages {
