@@ -43,13 +43,23 @@ pipeline {
       }
     }
 
+    // stage('SonarQube Analysis') {
+    //   steps {
+    //     withSonarQubeEnv("${env.SONARQUBE}") {
+    //       sh 'sonar-scanner'
+    //     }
+    //   }
+    // }
     stage('SonarQube Analysis') {
       steps {
-        withSonarQubeEnv("${env.SONARQUBE}") {
-          sh 'sonar-scanner'
-        }
+      script {
+      def scannerHome = tool 'SonarQubeScanner'
+      withSonarQubeEnv("${env.SONARQUBE}") {
+        sh "${scannerHome}/bin/sonar-scanner"
+       }
       }
     }
+  }
 
     stage('Quality Gate') {
       steps {
