@@ -7,7 +7,7 @@
     "lint": "npx eslint . --format checkstyle -o checkstyle-result.xml",
     "validate:html": "npx html-validate './*.html'",
     "validate:css": "npx stylelint '**/*.css'",
-    "test": "npx jest"
+    "test": "npx jest --reporters=default --reporters=jest-junit"
   },
   "repository": {
     "type": "git",
@@ -28,8 +28,13 @@
     "stylelint": "^16.20.0",
     "stylelint-config-standard": "^38.0.0"
   },
-  "jest-junit": {
-    "outputDirectory": ".",
-    "outputName": "junit.xml"
+  "jest": {
+    "reporters": [
+      "default",
+      ["jest-junit", {
+        "outputDirectory": "./",
+        "outputName": "junit.xml"
+      }]
+    ]
   }
 }
