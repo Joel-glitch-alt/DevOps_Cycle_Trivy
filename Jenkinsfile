@@ -2,14 +2,11 @@ pipeline {
     agent any
     
     tools {
-        nodejs 'NodeJs' // Make sure NodeJS is configured in Jenkins Global Tools
+        nodejs 'NodeJS' // Make sure NodeJS is configured in Jenkins Global Tools
     }
     
     environment {
-        //SONAR_SERVER = 'sonar-server'
-        //SONAR_SCANNER = 'sonar-scanner'
-        //SONAR_TOKEN = credentials('sonar-token')
-        SONAR_QUALITY_GATE = 'sonar-quality-gate'
+        SONAR_TOKEN = credentials('sonar-token')
     }
     
     stages {
@@ -28,7 +25,7 @@ pipeline {
                         {
                             "name": "devops-project",
                             "version": "1.0.0",
-                            "description": "DevOps project with SonarQube analysis, Docker, Kubernetes, and Trivia",
+                            "description": "JavaScript project with SonarQube analysis",
                             "main": "script.js",
                             "scripts": {
                                 "test": "echo \\"No tests specified\\"",
@@ -67,8 +64,8 @@ pipeline {
                     // Create sonar-project.properties if it doesn't exist
                     if (!fileExists('sonar-project.properties')) {
                         writeFile file: 'sonar-project.properties', text: '''
-                        sonar.projectKey=javascript-project
-                        sonar.projectName=JavaScript Project
+                        sonar.projectKey=devops-project
+                        sonar.projectName=DevOps Project
                         sonar.projectVersion=1.0
                         sonar.sources=.
                         sonar.exclusions=node_modules/**,**/*.min.js,dist/**,build/**
@@ -78,11 +75,11 @@ pipeline {
                     }
                 }
                 
-                withSonarQubeEnv("${SONAR_SERVER}") {
+                withSonarQubeEnv('sonar-server') {
                     sh """
-                        ${SONAR_SCANNER}/bin/sonar-scanner \\
+                        sonar-scanner \\
                         -Dsonar.login=${SONAR_TOKEN} \\
-                        -Dsonar.projectKey=javascript-project \\
+                        -Dsonar.projectKey=devops-project \\
                         -Dsonar.sources=. \\
                         -Dsonar.exclusions=node_modules/**,**/*.min.js,dist/**,build/**
                     """
@@ -118,22 +115,22 @@ pipeline {
             }
         }
         
-        // stage('Deploy to Staging') {
-        //     when {
-        //         branch 'master'
-        //     }
-        //     steps {
-        //         script {
-        //             echo 'Deploying to staging environment...'
-        //             // Add your staging deployment commands here
-        //             // Example: scp, rsync, or container deployment
-        //         }
-        //     }
-        // }
+        stage('Deploy to Staging') {
+            when {
+                branch 'develop'
+            }
+            steps {
+                script {
+                    echo 'Deploying to staging environment...'
+                    // Add your staging deployment commands here
+                    // Example: scp, rsync, or container deployment
+                }
+            }
+        }
         
         stage('Deploy to Production') {
             when {
-                branch 'master'
+                branch 'main'
             }
             steps {
                 script {
