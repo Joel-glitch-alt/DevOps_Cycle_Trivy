@@ -3,7 +3,7 @@ pipeline {
     
     tools {
         nodejs 'NodeJs' // Make sure NodeJS is configured in Jenkins Global Tools
-        sonarqube 'sonar-scanner' // This should match your Global Tool Configuration name
+        // SonarQube Scanner will be referenced using tool() function in the stage
     }
     
     environment {
