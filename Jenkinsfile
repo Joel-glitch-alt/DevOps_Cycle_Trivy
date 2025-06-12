@@ -4,6 +4,8 @@ pipeline {
   environment {
     NODE_ENV = 'test'
     SONARQUBE = 'sonar-server' // This must match your Jenkins SonarQube config name
+    DOCKER_USERNAME = 'addition1905'
+    DOCKER_IMAGE = 'addition1905/devops-trivy:latest'
   }
 
   tools {
@@ -70,6 +72,17 @@ pipeline {
         }
       }
     }
+
+     stage('Docker Build & Push') {
+            steps {
+                script {
+                    def img = docker.build("${DOCKER_IMAGE}")
+                    docker.withRegistry('https://index.docker.io/v1/', 'docker-hub') {
+                        img.push()
+                    }
+                }
+            }
+        }
 
   }
 
