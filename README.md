@@ -70,7 +70,7 @@ Secret detection and quality gates prevent unsafe deployments.
 
 📬 Author
 DevOps Engineer – Node.js | Docker | Jenkins | K8s
-Project by: [Your Name]
+Project by: Joel Joseph Doku
 Contact: joeladdition@gmail.com
 
 
