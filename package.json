@@ -1,0 +1,30 @@
+{
+  "name": "lets_row2",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint . --format checkstyle -o checkstyle-result.xml",
+    "validate:html": "html-validate *.html",
+    "validate:css": "stylelint **/*.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joel-glitch-alt/DevOps_Cycle_Trivy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Joel-glitch-alt/DevOps_Cycle_Trivy/issues"
+  },
+  "homepage": "https://github.com/Joel-glitch-alt/DevOps_Cycle_Trivy#readme",
+  "description": "",
+  "dependencies": {
+    "jest": "^30.0.0"
+  },
+  "devDependencies": {
+    "stylelint": "^16.20.0",
+    "stylelint-config-standard": "^38.0.0"
+  }
+}
