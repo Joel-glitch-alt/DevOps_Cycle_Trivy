@@ -1,8 +1,9 @@
 {
   "extends": "stylelint-config-standard",
   "rules": {
-    "indentation": 2,
-    "string-quotes": "single",
-    "color-no-invalid-hex": true
+    "color-function-notation": "modern",
+    "alpha-value-notation": "percentage",
+    "selector-type-no-unknown": true,
+    "no-descending-specificity": true
   }
 }
