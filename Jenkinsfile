@@ -3,11 +3,11 @@ pipeline {
 
   environment {
     NODE_ENV = 'test'
-    SONARQUBE = 'sonar-server' // Update this to match your Jenkins SonarQube config
+    SONARQUBE = 'sonar-server' // Ensure this matches your Jenkins SonarQube config name
   }
 
   tools {
-    nodejs 'NodeJs' // Ensure this matches your configured Node.js installation
+    nodejs 'NodeJs' // Ensure this matches your Node.js tool config in Jenkins
   }
 
   stages {
@@ -20,10 +20,6 @@ pipeline {
 
     stage('Install Dependencies') {
       steps {
-        // Option 1: Strict install (fails on conflict)
-        // sh 'npm ci'
-
-        // Option 2: Lenient install (ignores peer conflicts)
         sh 'npm ci --legacy-peer-deps'
       }
     }
@@ -38,11 +34,11 @@ pipeline {
 
     stage('Test') {
       steps {
-        sh 'npm test -- --coverage'
+        sh 'npm test'
       }
       post {
         always {
-          junit 'coverage/**/*.xml' // Ensure the coverage tool outputs XML in this path
+          junit 'junit.xml' // MATCH this to your jest-junit config
         }
       }
     }
