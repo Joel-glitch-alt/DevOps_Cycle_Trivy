@@ -31,10 +31,16 @@
   "jest": {
     "reporters": [
       "default",
-      ["jest-junit", {
-        "outputDirectory": "./",
-        "outputName": "junit.xml"
-      }]
+      [
+        "jest-junit",
+        {
+          "outputDirectory": "./",
+          "outputName": "junit.xml"
+        }
+      ]
     ]
+  },
+  "dependencies": {
+    "cross-spawn": "^7.0.5"
   }
 }
