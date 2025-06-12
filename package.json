@@ -7,7 +7,7 @@
     "lint": "npx eslint . --format checkstyle -o checkstyle-result.xml",
     "validate:html": "npx html-validate './*.html'",
     "validate:css": "npx stylelint '**/*.css'",
-    "test": "npx jest --coverage --testResultsProcessor=jest-junit"
+    "test": "npx jest"
   },
   "repository": {
     "type": "git",
