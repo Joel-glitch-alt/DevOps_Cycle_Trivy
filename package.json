@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
-    "test": "jest",
-    "lint": "eslint . --format checkstyle -o checkstyle-result.xml",
-    "validate:html": "html-validate *.html",
-    "validate:css": "stylelint **/*.css"
+    "lint": "npx eslint . --format checkstyle -o checkstyle-result.xml",
+    "validate:html": "npx html-validate .",
+    "validate:css": "npx stylelint '**/*.css'",
+    "test": "npx jest"
   },
   "repository": {
     "type": "git",
