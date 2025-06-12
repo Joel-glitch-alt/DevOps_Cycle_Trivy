@@ -1,8 +1,4 @@
 {
   "root": true,
-  "extends": ["html-validate:recommended"],
-  "ignore": [
-    "node_modules/**",
-    "**/demo/**"
-  ]
+  "extends": ["html-validate:recommended"]
 }
