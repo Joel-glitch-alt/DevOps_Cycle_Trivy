@@ -3,5 +3,9 @@
   "extends": ["html-validate:recommended"],
   "rules": {
     "void-style": "error"
-  }
+  },
+  "exclude": [
+    "node_modules/**",
+    "**/demo/**"
+  ]
 }

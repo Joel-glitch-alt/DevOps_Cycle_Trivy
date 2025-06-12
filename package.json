@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "lint": "npx eslint . --format checkstyle -o checkstyle-result.xml",
-    "validate:html": "npx html-validate .",
+    "validate:html": "npx html-validate \"./*.html\"",
     "validate:css": "npx stylelint '**/*.css'",
     "test": "npx jest"
   },
