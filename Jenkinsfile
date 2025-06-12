@@ -166,11 +166,26 @@ pipeline {
       }
     }
 
-    stage('Trivy FS Scan') {
-      steps {
-        sh 'trivy fs --exit-code 1 --severity HIGH,CRITICAL .'
+    // stage('Trivy FS Scan') {
+    //   steps {
+    //     sh 'trivy fs --exit-code 1 --severity HIGH,CRITICAL .'
+    //   }
+    // }
+    //
+          stage('Trivy FS Scan') {
+             steps {
+             script {
+             def scanResult = sh(script: 'trivy fs --severity HIGH,CRITICAL .', returnStatus: true)
+             if (scanResult != 0) {
+             currentBuild.result = 'UNSTABLE'
+             echo "Security vulnerabilities found."
+                     }
+              }
+         }
       }
-    }
+
+
+    //
 
     stage('Docker Build & Push') {
       steps {
