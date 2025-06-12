@@ -5,9 +5,9 @@ pipeline {
         nodejs 'NodeJs' // Make sure NodeJS is configured in Jenkins Global Tools
     }
     
-    // environment {
-    //     SONAR_TOKEN = credentials('sonar-token')
-    // }
+    environment {
+        SONAR_TOKEN = credentials('sonar-token')
+    }
     
     stages {
         stage('Checkout') {
