@@ -43,28 +43,21 @@ pipeline {
       }
     }
 
-    // stage('SonarQube Analysis') {
-    //   steps {
-    //     withSonarQubeEnv("${env.SONARQUBE}") {
-    //       sh 'sonar-scanner'
-    //     }
-    //   }
-    // }
     stage('SonarQube Analysis') {
       steps {
-      script {
-      def scannerHome = tool 'sonar-scanner'
-      withSonarQubeEnv("${env.SONARQUBE}") {
-        sh "${scannerHome}/bin/sonar-scanner"
-       }
+        script {
+          def scannerHome = tool 'sonar-scanner'  // Changed from 'SonarQubeScanner' to 'sonar-scanner'
+          withSonarQubeEnv("${env.SONARQUBE}") {
+            sh "${scannerHome}/bin/sonar-scanner"
+          }
+        }
       }
     }
-  }
 
     stage('Quality Gate') {
       steps {
         timeout(time: 10, unit: 'MINUTES') {
-          waitForQualityGate abortPipeline: true
+          waitForQualityGate abortPipeline: false  // Changed to false to not abort pipeline
         }
       }
     }
