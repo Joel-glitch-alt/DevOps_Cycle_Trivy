@@ -1,7 +1,8 @@
 {
   "root": true,
   "extends": ["html-validate:recommended"],
-  "rules": {
-    "void-style": "error"
-  }
+  "ignore": [
+    "node_modules/**",
+    "**/demo/**"
+  ]
 }
