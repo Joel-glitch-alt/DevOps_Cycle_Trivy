@@ -22,8 +22,8 @@
   "homepage": "https://github.com/Joel-glitch-alt/DevOps_Cycle_Trivy#readme",
   "devDependencies": {
     "eslint": "^8.57.0",
-    "html-validate": "^7.18.0",
-    "jest": "^30.0.0",
+    "html-validate": "^7.18.1",
+    "jest": "^29.7.0",
     "stylelint": "^16.20.0",
     "stylelint-config-standard": "^38.0.0"
   }
