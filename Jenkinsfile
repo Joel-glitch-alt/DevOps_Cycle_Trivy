@@ -3,6 +3,7 @@ pipeline {
     
     tools {
         nodejs 'NodeJs' // Make sure NodeJS is configured in Jenkins Global Tools
+        sonarqube 'sonar-scanner' // This should match your Global Tool Configuration name
     }
     
     environment {
@@ -44,7 +45,7 @@ pipeline {
             steps {
                 script {
                     // Optional: Run ESLint if configured
-                    sh 'npm run lint || echo "No linting configured"'
+                    sh 'npm run lint'
                 }
             }
         }
@@ -53,7 +54,7 @@ pipeline {
             steps {
                 script {
                     // Run tests if they exist
-                    sh 'npm test || echo "No tests configured"'
+                    sh 'npm test'
                 }
             }
         }
@@ -76,13 +77,13 @@ pipeline {
                 }
                 
                 withSonarQubeEnv('sonar-server') {
-                    sh """
-                        sonar-scanner \\
-                        -Dsonar.login=${SONAR_TOKEN} \\
-                        -Dsonar.projectKey=devops-project \\
-                        -Dsonar.sources=. \\
-                        -Dsonar.exclusions=node_modules/**,**/*.min.js,dist/**,build/**
-                    """
+                    script {
+                        def scannerHome = tool 'sonar-scanner'
+                        sh "${scannerHome}/bin/sonar-scanner \
+                            -Dsonar.projectKey=devops-project \
+                            -Dsonar.sources=. \
+                            -Dsonar.exclusions=node_modules/**,**/*.min.js,dist/**,build/**"
+                    }
                 }
             }
         }
@@ -105,9 +106,9 @@ pipeline {
                 script {
                     // Create a simple build directory with your JavaScript files
                     sh 'mkdir -p dist'
-                    sh 'cp *.js dist/ || echo "No JS files to copy"'
-                    sh 'cp *.html dist/ || echo "No HTML files to copy"'
-                    sh 'cp *.css dist/ || echo "No CSS files to copy"'
+                    sh 'cp *.js dist/ 2>/dev/null || echo "No JS files to copy"'
+                    sh 'cp *.html dist/ 2>/dev/null || echo "No HTML files to copy"'
+                    sh 'cp *.css dist/ 2>/dev/null || echo "No CSS files to copy"'
                 }
                 
                 // Archive artifacts
